@@ -10,22 +10,19 @@ const Section: React.FC<SectionProps> = ({ html, sectionNumber, id }) => {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const sections = document.getElementsByTagName('section');
-    if (sections.length >= sectionNumber) {
-      const targetSection = sections[sectionNumber - 1];
-      if (sectionRef.current && targetSection.nextSibling) {
-        targetSection.parentNode?.insertBefore(sectionRef.current, targetSection.nextSibling);
-      }
-    }
+    const extraDescriptionSection = document.getElementById('extra-description');
+  if (extraDescriptionSection && sectionRef.current) {
+    extraDescriptionSection.appendChild(sectionRef.current);
+  }
   }, [sectionNumber]);
 
-  return <section
+  return <div
     id={id}
-    className="max-w-6xl mx-auto sm:px-6 lg:px-8"
+    className="py-10 sm:py-16 max-w-6xl px-4 mx-auto sm:px-6 lg:px-8"
     ref={sectionRef}
     dangerouslySetInnerHTML={{ __html: html }}
   >
-  </section>
+  </div>
 }
 
 export default Section;
